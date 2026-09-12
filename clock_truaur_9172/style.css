@@ -1,0 +1,134 @@
+@font-face {
+    font-family: 'TT Commons';
+    src: url('fonts/TT-Commons-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+html, body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000;
+    font-family: 'TT Commons', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+#bg-video {
+    display: none;
+}
+
+#pixi-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+#pixi-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+}
+
+.clock {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    z-index: 2;
+    pointer-events: none;
+    padding: 30px 20px;
+    overflow: hidden;
+}
+
+.group {
+    display: flex;
+    align-items: center;
+}
+
+.colon {
+    font-size: 135px;
+    line-height: 1;
+    color: #fff;
+    padding: 0 6px 18px 6px;
+    text-shadow: 0 8px 24px rgba(0, 0, 0, 0.95);
+}
+
+.digit-container {
+    position: relative;
+    width: 78px;
+    height: 145px;
+    perspective: 700px;
+    isolation: isolate;
+}
+
+.digit {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 135px;
+    font-weight: 500;
+    color: #fff;
+    background: transparent;
+    text-shadow: 0 10px 26px rgba(0, 0, 0, 0.95);
+    will-change: transform, opacity;
+}
+
+/* Статичное положение (когда анимация завершена) */
+.digit.static {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+    z-index: 1;
+}
+
+/* НОВОЕ ЧИСЛО: строго снизу вверх через @keyframes */
+.digit.enter {
+    z-index: 2;
+    animation: digitEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* СТАРОЕ ЧИСЛО: строго назад вглубь и непрозрачность в 0 */
+.digit.exit {
+    z-index: 0;
+    pointer-events: none;
+    animation: digitExit 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes digitEnter {
+    0% {
+        transform: translate3d(0, 100%, 0);
+        opacity: 0;
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+
+@keyframes digitExit {
+    0% {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate3d(0, 0, -150px);
+        opacity: 0;
+    }
+}
