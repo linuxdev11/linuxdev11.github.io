@@ -1,0 +1,33 @@
+<!-- by amplex studio, lisence cc0 -->
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Glass Clock</title>
+    <link rel="preload" href="fonts/TT-Commons-Medium.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.3.2/pixi.min.js"></script>
+</head>
+<body>
+
+<!-- Источник видео и аудио -->
+<video id="bg-video" src="media/bg.mp4" autoplay loop muted playsinline crossorigin="anonymous"></video>
+<audio id="bg-audio" src="media/bg.mp3" autoplay loop></audio>
+
+<!-- PixiJS холст (видео + готовый шейдер преломления стекла) -->
+<div id="pixi-container"></div>
+
+<!-- Часы на твоей разметке -->
+<div class="clock" id="clock">
+    <div class="group" id="hours"></div>
+    <div class="colon">:</div>
+    <div class="group" id="minutes"></div>
+    <div class="colon">:</div>
+    <div class="group" id="seconds"></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
